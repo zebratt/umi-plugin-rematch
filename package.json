@@ -1,13 +1,13 @@
 {
   "name": "umi-plugin-rematch",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "lib/index.js",
   "description": "test",
   "authors": {
     "name": "matt",
     "email": ""
   },
-  "repository": "zebratt/mattlab/umi-plugin-rematch",
+  "repository": "zebratt/umi-plugin-rematch",
   "scripts": {
     "start": "cross-env APP_ROOT=example umi dev",
     "build": "father-build",

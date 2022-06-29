@@ -1,4 +1,4 @@
-# umi-plugin
+# umi-plugin-rematch
 
 [![NPM version](https://img.shields.io/npm/v/umi-plugin.svg?style=flat)](https://npmjs.org/package/umi-plugin) [![NPM downloads](http://img.shields.io/npm/dm/umi-plugin.svg?style=flat)](https://npmjs.org/package/umi-plugin)
 
@@ -6,15 +6,15 @@ Rematch plugin for umi
 
 # Intro
 
-默认集成了Immer插件
+默认集成了 Immer 插件
 
 ## Usage
 
 1. yarn add umi-plugin-rematch -D
 
-安装完成后即可使用，umi会自动加载umi-plugin开头的插件
+安装完成后即可使用，umi 会自动加载 umi-plugin 开头的插件
 
-2. 在src目录下创建models目录，创建model后即可使用，后续使用方式和rematch一样
+2. 在 src 目录下创建 models 目录，创建 model 后即可使用，后续使用方式和 rematch 一样
 
 ## Example
 
