@@ -11,10 +11,14 @@ Rematch plugin for umi
 ## Usage
 
 1. yarn add umi-plugin-rematch -D
+2. yarn add @rematch/core @rematch/immer
 
 安装完成后即可使用，umi 会自动加载 umi-plugin 开头的插件
 
-2. 在 src 目录下创建 models 目录，创建 model 后即可使用，后续使用方式和 rematch 一样
+3. 在 src 目录下任意层级创建 models 目录
+4. models 内下创建 model: xxx.rm.ts
+
+支持解析 xx.rm.{ts,tsx,js,jsx} 名称的文件
 
 ## Example
 

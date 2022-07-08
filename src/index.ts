@@ -17,16 +17,9 @@ export default function(api: IApi) {
 
   const { paths } = api;
 
-  function getModelsPath() {
-    return join(paths.absSrcPath!, 'models');
-  }
-
   function getAllModels() {
-    const srcModelsPath = getModelsPath();
-
     return lodash.uniq([
-      ...getModels(srcModelsPath),
-      ...getModels(paths.absPagesPath!, `**/models/**/*.{ts,tsx,js,jsx}`),
+      ...getModels(paths.absSrcPath!, `**/models/**/*.rm.{ts,tsx,js,jsx}`),
     ]);
   }
 

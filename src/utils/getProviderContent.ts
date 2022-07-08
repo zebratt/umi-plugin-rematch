@@ -13,7 +13,7 @@ import type { Models } from '@rematch/core'
 import { init } from '@rematch/core';
 import { Provider } from 'react-redux'
 import immerPlugin from '@rematch/immer';
-import type { RematchDispatch, RematchRootState } from '@rematch/core';
+import type { RematchRootState } from '@rematch/core';
 ${imports}
 
 export interface RootModel extends Models<RootModel> {${typeofUserModels} };

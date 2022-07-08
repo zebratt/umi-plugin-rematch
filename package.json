@@ -1,6 +1,6 @@
 {
   "name": "umi-plugin-rematch",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "main": "lib/index.js",
   "description": "test",
   "authors": {

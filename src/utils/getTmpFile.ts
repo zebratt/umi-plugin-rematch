@@ -1,10 +1,19 @@
 import getProviderContent from './getProviderContent';
 import { genImports, genModels } from '.';
 
+function getModelName(name: string) {
+  return name.split('.').reverse()?.[1] || name;
+}
+
 function getModels(files: string[], absSrcPath: string) {
   const sortedModels = genModels(files, absSrcPath);
   return sortedModels
-    .map(ele => `'${ele.namespace.replace(/'/g, "\\'")}': ${ele.importName}`)
+    .map(
+      ele =>
+        `'${getModelName(ele.namespace.replace(/'/g, "\\'"))}': ${
+          ele.importName
+        }`,
+    )
     .join(', ');
 }
 
@@ -13,7 +22,9 @@ function getModelsType(files: string[], absSrcPath: string) {
   return sortedModels
     .map(
       ele =>
-        `'${ele.namespace.replace(/'/g, "\\'")}': typeof ${ele.importName}`,
+        `'${getModelName(ele.namespace.replace(/'/g, "\\'"))}': typeof ${
+          ele.importName
+        }`,
     )
     .join(', ');
 }
