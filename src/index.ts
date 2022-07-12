@@ -1,53 +1,52 @@
 // ref:
 // - https://umijs.org/plugins/api
-import { IApi } from '@umijs/types';
 import { readFileSync } from 'fs';
-import { join } from 'path';
-import { utils } from 'umi';
 import lodash from 'lodash';
+import { join } from 'path';
+import { IApi } from 'umi';
 import { getModels } from './utils/getModels';
 import { getTmpFile } from './utils/getTmpFile';
+import { withTmpPath } from './utils/withTmpPath';
 
-const DIR_NAME = 'plugin-rematch';
-
-const { winPath } = utils;
-
-export default function(api: IApi) {
+export default function (api: IApi) {
   api.logger.info('use rematch plugin');
+
+  api.describe({
+    key: 'rematch',
+  });
 
   const { paths } = api;
 
   function getAllModels() {
     return lodash.uniq([
-      ...getModels(paths.absSrcPath!, `**/models/**/*.rm.{ts,tsx,js,jsx}`),
+      ...getModels(paths.absSrcPath, `**/models/**/*.rm.{ts,tsx,js,jsx}`),
     ]);
   }
 
-  api.addUmiExports(() => [
-    {
-      exportAll: true,
-      source: winPath(`../${DIR_NAME}/Provider`),
-    },
-  ]);
-
-  api.addRuntimePlugin(() => `../${DIR_NAME}/runtime`);
+  api.addRuntimePlugin(() => {
+    return [withTmpPath({ api, path: 'runtime.tsx' })];
+  });
 
   api.onGenerateFiles(() => {
     const files = getAllModels();
-    const tmpFiles = getTmpFile(files, paths.absSrcPath!);
+    const tmpFiles = getTmpFile(files, paths.absSrcPath);
 
     // provider.tsx
     api.writeTmpFile({
-      path: `${DIR_NAME}/Provider.tsx`,
+      path: `index.tsx`,
       content: tmpFiles.providerContent,
     });
 
     api.writeTmpFile({
-      path: `${DIR_NAME}/runtime.tsx`,
-      content: utils.Mustache.render(
-        readFileSync(join(__dirname, 'runtime.tsx.tpl'), 'utf-8'),
-        {},
-      ),
+      path: `runtime.tsx`,
+      content: readFileSync(join(__dirname, 'runtime.tsx.tpl'), 'utf-8'),
+    });
+
+    api.writeTmpFile({
+      path: 'types.d.ts',
+      content: `
+export type { RootModel, RootState } from '.';
+      `,
     });
   });
 }

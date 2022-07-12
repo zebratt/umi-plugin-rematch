@@ -1,4 +1,4 @@
-export default function(
+export default function (
   imports: string,
   userModels: string,
   typeofUserModels: string,
@@ -27,11 +27,9 @@ export const store = init<RootModel>({
 
 export type RootState = RematchRootState<RootModel>;
 
-export default ({ children }: { children: React.ReactNode }) => {
-
+export const RematchProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <Provider store={store}>
-      <h1>This is provider layer</h1>
       {children}
     </Provider>
   )

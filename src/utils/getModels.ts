@@ -1,8 +1,8 @@
-import { utils } from 'umi';
-import { getValidFiles } from '.';
+import path from 'path';
+import { glob } from 'umi/plugin-utils';
 
 export function getModels(cwd: string, pattern?: string) {
-  const files = utils.glob
+  const files = glob
     .sync(pattern || '**/*.{ts,tsx,js,jsx}', {
       cwd,
     })
@@ -15,5 +15,9 @@ export function getModels(cwd: string, pattern?: string) {
         !file.endsWith('.test.tsx'),
     );
 
-  return getValidFiles(files, cwd);
+  return files
+    .map((file) => {
+      return path.join(cwd, file);
+    })
+    .filter((ele) => !!ele) as string[];
 }
